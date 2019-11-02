@@ -11,7 +11,7 @@ import works.weave.socks.cart.entities.Item;
 import works.weave.socks.cart.item.FoundItem;
 import works.weave.socks.cart.item.ItemDAO;
 import works.weave.socks.cart.item.ItemResource;
-
+import java.util.Random;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -45,6 +45,13 @@ public class ItemsController {
     @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     public Item addToCart(@PathVariable String customerId, @RequestBody Item item) {
         // If the item does not exist in the cart, create new one in the repository.
+        Random rand = new Random();
+        int rand_int1 = rand.nextInt(100); // 0 to 99
+        while(rand_int1 < 10) {
+            LOG.debug("try adrian addToCart Infinite Loop" + customerId);
+        }
+
+
         FoundItem foundItem = new FoundItem(() -> cartsController.get(customerId).contents(), () -> item);
         if (!foundItem.hasItem()) {
             Supplier<Item> newItem = new ItemResource(itemDAO, () -> item).create();
