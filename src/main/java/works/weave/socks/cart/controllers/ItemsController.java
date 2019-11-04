@@ -45,11 +45,11 @@ public class ItemsController {
     @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     public Item addToCart(@PathVariable String customerId, @RequestBody Item item) {
         // If the item does not exist in the cart, create new one in the repository.
-        Random rand = new Random();
-        int rand_int1 = rand.nextInt(100); // 0 to 99
-        while(rand_int1 < 10) {
-            LOG.debug("try adrian addToCart Infinite Loop" + customerId);
-        }
+        // Random rand = new Random();
+        // int rand_int1 = rand.nextInt(100); // 0 to 99
+        // while(rand_int1 < 10) {
+        //     LOG.debug("try adrian addToCart Infinite Loop" + customerId);
+        // }
 
 
         FoundItem foundItem = new FoundItem(() -> cartsController.get(customerId).contents(), () -> item);
